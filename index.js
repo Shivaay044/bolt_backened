@@ -32,8 +32,8 @@ const swaggerDefinition = {
     },
     servers: [
       {
-        url: 'http://localhost:7913',
-        description: 'Development server',
+        url: 'https://back-ened-bolt.onrender.com/',
+        description: 'Deployed server',
       },
     ],
 
