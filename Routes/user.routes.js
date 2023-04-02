@@ -86,7 +86,7 @@ userRouter.get("/", (req, res) => {
  */
 
 userRouter.post("/register", async (req, res) => {
-  const { name, email, password, location, age } = req.body;
+  const { name, email, password, location, age, role } = req.body;
   try {
     const emailcheck = await userModel.findOne({ email });
     if (emailcheck) {
@@ -99,13 +99,14 @@ userRouter.post("/register", async (req, res) => {
           password: hash,
           location,
           age,
+          role
         });
         await user.save();
-        res.status(200).send({ msg: "Registration successfull" });
+        res.status(200).send({ "msg": "Registration successfull" });
       });
     }
   } catch (error) {
-    res.status(400).send({ msg: error.message });
+    res.status(400).send({ "msg": error.message });
   }
 });
 
@@ -141,11 +142,14 @@ userRouter.post("/login", async (req, res) => {
   try {
     const user = await userModel.findOne({ email });
     if (user) {
+      console.log(user)
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
           res.status(200).send({
             msg: "login successfull",
             token: jwt.sign({ userID: user._id }, process.env.secret_code),
+            id:user._id,
+            role:user.role
           });
         } else {
           res.status(400).send({"msg":"wrong credential"});
