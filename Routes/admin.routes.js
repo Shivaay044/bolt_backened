@@ -237,7 +237,6 @@ adminRouter.delete("/:id",async(req,res)=>{
 adminRouter.patch("/:id",async(req,res)=>{
     try {
        const idExist = await adminModel.findOne({"_id":req.params.id})
-       console.log(idExist)
        if(idExist){
           await adminModel.findByIdAndUpdate(req.params.id,req.body)
           res.status(200).send({"msg":"Product updated successfully"})

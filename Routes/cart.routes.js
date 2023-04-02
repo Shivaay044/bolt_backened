@@ -171,7 +171,7 @@ cartRouter.delete("/:id",async(req,res)=>{
   try {
      const idExist = await cartModel.findOne({"_id":req.params.id})
      if(idExist){
-        await cartRouter.findByIdAndDelete(req.params.id)
+        await cartModel.findByIdAndDelete(req.params.id)
         res.status(200).send({"msg":"Product deleted successfully"})
      }else{
         res.status(400).send({"msg":"Product id invalid"})
