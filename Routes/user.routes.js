@@ -159,4 +159,24 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
+
+
+
+userRouter.patch("/adminUpdate/:id",async(req,res)=>{
+  try {
+     const idExist = await userModel.findOne({"_id":req.params.id})
+     if(idExist){
+        await userModel.findByIdAndUpdate(req.params.id,req.body)
+        res.status(200).send({"msg":"Admin Detail Updated"})
+     }else{
+        res.status(400).send({"msg":"Admin id invalid"})
+     }
+  } catch (error) {
+    res.status(400).send({"msg":error.message})
+  }
+})
+
+
+
 module.exports = { userRouter };
+
