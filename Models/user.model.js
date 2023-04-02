@@ -7,6 +7,7 @@ const userschema = mongoose.Schema(
     password: String,
     age: Number,
     location: String,
+    role:String
   },
   {
     versionKey: false,

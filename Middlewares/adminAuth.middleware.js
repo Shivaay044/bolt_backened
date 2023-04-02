@@ -9,10 +9,10 @@ const adminAuth = (req,res,next) =>{
         req.body.userID = decoded.userID
         next()
     }else{
-        res.status(400).send("Token Invalid")
+        res.status(400).send({"msg":"Token Invalid"})
     }
   })
 }else
-  res.status(400).send("Token not available")
+  res.status(400).send({"msg":"Token not available"})
 }
 module.exports={adminAuth}
